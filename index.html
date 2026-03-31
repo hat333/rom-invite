@@ -196,6 +196,29 @@ body {
   color: var(--text);
   display: block;
 }
+
+.contact-item .num-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.wa-btn {
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+}
+
+.wa-btn:hover {
+  background: var(--gold);
+  color: #000;
+}
 .d-val small {
   display: block; font-size: 13px; color: var(--muted); margin-top: 1px;
 }
@@ -385,13 +408,25 @@ body {
     <div class="contact-grid">
       <div class="contact-item">
         <span class="name">Hong Aun · 鸿安</span>
-        <span class="num">+60 17-799 8065</span>
-        <span class="num">+65 8683-5537</span>
+        <div class="num-row">
+          <span class="num">+60 17-799 8065</span>
+          <a class="wa-btn" href="https://wa.me/60177998065" target="_blank">WA</a>
+        </div>
+        <div class="num-row">
+          <span class="num">+65 8683-5537</span>
+          <a class="wa-btn" href="https://wa.me/6586835537" target="_blank">WA</a>
+        </div>
       </div>
       <div class="contact-item">
         <span class="name">Sheen Yie · 欣怡</span>
-        <span class="num">+60 11-1199 5230</span>
-        <span class="num">+65 8783-5230</span>
+        <div class="num-row">
+          <span class="num">+60 11-1199 5230</span>
+          <a class="wa-btn" href="https://wa.me/601111995230" target="_blank">WA</a>
+        </div>
+        <div class="num-row">
+          <span class="num">+65 8783-5230</span>
+          <a class="wa-btn" href="https://wa.me/6587835230" target="_blank">WA</a>
+        </div>
       </div>
     </div>
 
@@ -460,13 +495,25 @@ body {
     <div class="contact-grid">
       <div class="contact-item">
         <span class="name">鸿安</span>
-        <span class="num">+60 17-799 8065</span>
-        <span class="num">+65 8683-5537</span>
+        <div class="num-row">
+          <span class="num">+60 17-799 8065</span>
+          <a class="wa-btn" href="https://wa.me/60177998065" target="_blank">WA</a>
+        </div>
+        <div class="num-row">
+          <span class="num">+65 8683-5537</span>
+          <a class="wa-btn" href="https://wa.me/6586835537" target="_blank">WA</a>
+        </div>
       </div>
       <div class="contact-item">
         <span class="name">欣怡</span>
-        <span class="num">+60 11-1199 5230</span>
-        <span class="num">+65 8783-5230</span>
+        <div class="num-row">
+          <span class="num">+60 11-1199 5230</span>
+          <a class="wa-btn" href="https://wa.me/601111995230" target="_blank">WA</a>
+        </div>
+        <div class="num-row">
+          <span class="num">+65 8783-5230</span>
+          <a class="wa-btn" href="https://wa.me/6587835230" target="_blank">WA</a>
+        </div>
       </div>
     </div>
 
