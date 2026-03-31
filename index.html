@@ -6,25 +6,18 @@
 <title>ROM — Tee Hong Aun & Pang Sheen Yie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@400;500&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
-
 <style>
-/* ── RESET & ROOT ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
-
 :root {
   --gold: #d4af37;
   --gold-dark: #b8962e;
-  --gold-dim: rgba(212,175,55,0.18);
   --gold-border: rgba(212,175,55,0.35);
   --bg: #080809;
   --card: #111113;
-  --card2: #161618;
   --text: #f0f0f2;
-  --muted: rgba(240,240,242,0.55);
-  --sage: #7a8c6e;
+  --muted: rgba(240,240,242,0.52);
 }
-
 body {
   margin: 0;
   background: var(--bg);
@@ -34,425 +27,259 @@ body {
   text-align: center;
 }
 
-/* ── FLOATING NAV ── */
+/* ── NAV ── */
 .nav {
-  position: fixed;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 100;
-  background: rgba(8,8,9,0.72);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 40px;
-  padding: 7px 10px;
+  position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px; z-index: 100;
+  background: rgba(8,8,9,0.78); backdrop-filter: blur(16px);
+  border: 1px solid rgba(212,175,55,0.2); border-radius: 40px; padding: 7px 10px;
 }
-.nav-lang {
-  display: flex;
-  border-radius: 30px;
-  overflow: hidden;
-  border: 1px solid var(--gold-border);
-}
+.nav-lang { display: flex; border-radius: 30px; overflow: hidden; border: 1px solid var(--gold-border); }
 .nav-lang button {
-  font-family: 'Cinzel', serif;
-  font-size: 15px;
-  letter-spacing: 0.15em;
-  padding: 6px 14px;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  transition: background 0.2s, color 0.2s;
+  font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.15em;
+  padding: 7px 16px; cursor: pointer; border: none; background: transparent;
+  color: var(--muted); transition: background 0.2s, color 0.2s;
 }
 .nav-lang button.active { background: var(--gold); color: #000; font-weight: 600; }
 .nav-music {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: rgba(212,175,55,0.1);
-  border: 1px solid var(--gold-border);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(212,175,55,0.1); border: 1px solid var(--gold-border);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  font-size: 17px;
-  transition: background 0.2s;
+  cursor: pointer; font-size: 17px; transition: background 0.2s;
 }
-.nav-music:hover { background: rgba(212,175,55,0.2); }
+.nav-music:hover { background: rgba(212,175,55,0.22); }
 
 /* ── HERO ── */
-.hero {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  background: #000;
-}
+.hero { position: relative; height: 100vh; overflow: hidden; background: #000; }
 .hero img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: brightness(45%);
-  transform: scale(1.06);
-  transition: transform 0.1s linear;
-  display: block;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(42%); transform: scale(1.06);
+  transition: transform 0.1s linear; display: block;
 }
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom,
-    rgba(0,0,0,0) 30%,
-    rgba(8,8,9,0.6) 75%,
-    rgba(8,8,9,0.95) 100%);
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 25%, rgba(8,8,9,0.55) 70%, rgba(8,8,9,0.97) 100%);
   pointer-events: none;
 }
 .hero-content {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 0 24px 48px;
-  text-align: center;
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 0 24px 36px; text-align: center;
 }
 .hero-eyebrow {
-  font-family: 'Cinzel', serif;
-  font-size: 22px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 12px;
+  font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
   animation: fadeUp 1.2s 0.2s both;
 }
 .hero-names {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(2.6rem, 9vw, 4.8rem);
-  line-height: 1.1;
-  color: #fff;
-  margin-bottom: 6px;
-  animation: fadeUp 1.2s 0.4s both;
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(2.6rem, 9vw, 4.8rem); line-height: 1.05;
+  color: #fff; margin-bottom: 4px; animation: fadeUp 1.2s 0.4s both;
 }
-.hero-names .amp {
-  font-style: italic;
-  color: var(--gold);
-  display: inline;
-}
+.hero-names .amp { font-style: italic; color: var(--gold); }
 .hero-zh {
-  font-family: 'Noto Serif SC', serif;
-  font-size: clamp(1.2rem, 3.5vw, 1.7rem);
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 18px;
+  font-family: 'Noto Serif SC', serif; font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: rgba(255,255,255,0.55); margin-bottom: 14px;
   animation: fadeUp 1.2s 0.55s both;
 }
 .hero-date-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--gold-border);
-  border-radius: 40px;
-  padding: 8px 20px;
-  font-family: 'Cinzel', serif;
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(8px);
-  margin-bottom: 24px;
-  animation: fadeUp 1.2s 0.7s both;
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid var(--gold-border); border-radius: 40px;
+  padding: 9px 22px; font-family: 'Cinzel', serif; font-size: 14px;
+  letter-spacing: 0.18em; color: var(--gold);
+  background: rgba(0,0,0,0.45); backdrop-filter: blur(8px);
+  margin-bottom: 16px; animation: fadeUp 1.2s 0.7s both;
 }
-.hero-date-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.6; }
-
-/* QR in hero */
+.hero-date-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.55; }
 .hero-qr {
-  display: inline-block;
-  background: white;
-  padding: 8px;
-  border-radius: 10px;
-  animation: fadeUp 1.2s 0.9s both;
+  display: inline-block; background: white; padding: 7px;
+  border-radius: 10px; animation: fadeUp 1.2s 0.9s both;
 }
 .hero-qr img { display: block; border-radius: 4px; }
 
 /* ── COUNTDOWN ── */
-.countdown-section {
-  padding: 36px 20px 28px;
-  background: linear-gradient(180deg, var(--bg) 0%, #0e0e10 100%);
-}
+.countdown-section { padding: 28px 20px 22px; }
 .section-eyebrow {
-  font-family: 'Cinzel', serif;
-  font-size: 12px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 6px;
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block;
 }
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 16px;
-}
+.countdown { display: flex; justify-content: center; gap: 10px; }
 .count-box {
-  background: var(--card);
-  border: 1px solid var(--gold-border);
-  border-radius: 14px;
-  padding: 14px 10px 10px;
-  min-width: 76px;
-  box-shadow: 0 0 20px rgba(212,175,55,0.07), inset 0 1px 0 rgba(212,175,55,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: var(--card); border: 1px solid var(--gold-border); border-radius: 12px;
+  padding: 12px 8px 10px; min-width: 74px;
+  box-shadow: 0 0 20px rgba(212,175,55,0.06), inset 0 1px 0 rgba(212,175,55,0.08);
 }
-.count-box:hover { transform: translateY(-3px); box-shadow: 0 0 28px rgba(212,175,55,0.18); }
 .count-number {
-  font-family: 'Cinzel', serif;
-  font-size: 34px;
-  font-weight: 500;
-  color: var(--gold);
-  text-shadow: 0 0 12px rgba(212,175,55,0.5);
-  line-height: 1;
-  display: block;
+  font-family: 'Cinzel', serif; font-size: 34px; font-weight: 500;
+  color: var(--gold); text-shadow: 0 0 14px rgba(212,175,55,0.45);
+  line-height: 1; display: block;
 }
 .count-label {
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 5px;
-  display: block;
+  font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin-top: 5px; display: block;
 }
 
-/* ── GOLD DIVIDER ── */
-.gold-divider {
-  width: 80px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 10px auto 0;
-  opacity: 0.5;
-}
-.gold-divider.wide { width: 140px; }
+/* ── MAIN CONTENT ── */
+.content { max-width: 600px; margin: 0 auto; padding: 0 16px 40px; }
 
-/* ── SECTIONS ── */
-.section {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 26px 20px;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.section.show { opacity: 1; transform: translateY(0); }
-
-.section-header {
+/* ── BIG CARD (all-in-one) ── */
+.info-card {
+  background: var(--card); border: 1px solid var(--gold-border); border-radius: 20px;
+  overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5);
   margin-bottom: 14px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 26px;
-  font-weight: 400;
-  color: #fff;
-  letter-spacing: 0.05em;
-}
-.section-title .icon { margin-right: 6px; }
+.info-card.show { opacity: 1; transform: translateY(0); }
 
-/* ── DETAIL CARD ── */
-.detail-card {
-  background: var(--card);
-  border: 1px solid var(--gold-border);
-  border-radius: 16px;
-  padding: 6px 0;
-  text-align: left;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.05) inset;
+.card-section-label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 18px 0;
+}
+.card-section-label span {
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--gold); font-weight: 600;
+}
+.card-section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(212,175,55,0.3), transparent);
 }
 
 .detail-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 13px 20px;
-  border-bottom: 1px solid rgba(212,175,55,0.08);
+  display: flex; align-items: center; gap: 14px;
+  padding: 11px 18px; border-bottom: 1px solid rgba(212,175,55,0.07);
   transition: background 0.2s;
 }
 .detail-row:last-child { border-bottom: none; }
 .detail-row:hover { background: rgba(212,175,55,0.04); }
 
-.detail-icon-wrap {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  background: rgba(212,175,55,0.08);
-  border: 1px solid rgba(212,175,55,0.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-  margin-top: 1px;
+.d-icon {
+  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+  background: rgba(212,175,55,0.09); border: 1px solid rgba(212,175,55,0.18);
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+}
+.d-body { flex: 1; text-align: left; min-width: 0; }
+.d-label {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); font-family: 'Cinzel', serif; font-weight: 600;
+  display: block; margin-bottom: 2px;
+}
+.d-val {
+  font-size: 16px; color: var(--text); line-height: 1.4; font-weight: 400;
+}
+.d-val.big {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 20px;
 }
 
-.detail-text { flex: 1; min-width: 0; }
-.detail-label {
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px 18px 14px;
+}
+.contact-item {
+  background: rgba(212,175,55,0.05);
+  border: 1px solid rgba(212,175,55,0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  text-align: left;
+}
+.contact-item .name {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
   color: var(--gold);
-  font-weight: 600;
-  display: block;
   margin-bottom: 4px;
-  font-family: 'Cinzel', serif;
-}
-.detail-value {
-  font-size: 17px;
-  color: var(--text);
-  line-height: 1.5;
-  font-weight: 400;
-}
-.detail-value em {
   display: block;
-  font-style: normal;
-  font-size: 14px;
-  color: var(--muted);
-  margin-top: 2px;
 }
-.detail-value a {
-  color: var(--gold);
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-family: 'Cinzel', serif;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 4px;
+.contact-item .num {
+  font-size: 15px;
+  color: var(--text);
+  display: block;
+}
+.d-val small {
+  display: block; font-size: 13px; color: var(--muted); margin-top: 1px;
+}
+.d-val .dim { font-size: 13px; color: rgba(255,255,255,0.28); font-style: italic; }
+.d-val a {
+  color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif;
+  font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
   transition: color 0.2s;
 }
-.detail-value a::after { content: '→'; font-style: normal; }
-.detail-value a:hover { color: #fff; }
-.detail-value .coming-soon {
-  font-size: 14px;
-  color: rgba(255,255,255,0.3);
-  font-style: italic;
-  font-family: 'Cormorant Garamond', serif;
-}
+.d-val a:hover { color: #fff; }
 
-/* Highlighted "big" value */
-.detail-value.big {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-}
+/* card separator */
+.card-sep { height: 1px; background: rgba(212,175,55,0.12); margin: 4px 0; }
 
-/* ── RSVP BUTTON ── */
+/* ── RSVP BUTTON CARD ── */
 .rsvp-card {
-  background: var(--card);
-  border: 1px solid var(--gold-border);
-  border-radius: 16px;
-  padding: 22px 24px;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  background: var(--card); border: 1px solid var(--gold-border); border-radius: 20px;
+  padding: 20px 22px; margin-bottom: 14px; text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
 }
-.rsvp-card p {
-  font-size: 16px;
-  color: var(--muted);
-  margin-bottom: 16px;
-  line-height: 1.6;
-}
+.rsvp-card.show { opacity: 1; transform: translateY(0); }
+.rsvp-card p { font-size: 15px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
 .btn-rsvp {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 30px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 32px;
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #000;
-  font-family: 'Cinzel', serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 40px;
-  box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+  color: #000; font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+  border-radius: 40px; box-shadow: 0 4px 22px rgba(212,175,55,0.38);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.btn-rsvp:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 28px rgba(212,175,55,0.45); }
-.btn-rsvp:active { transform: scale(0.98); }
+.btn-rsvp:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 30px rgba(212,175,55,0.48); }
 
 /* ── GALLERY ── */
-.gallery-section {
-  padding: 28px 20px 40px;
-  background: var(--card2);
-  border-top: 1px solid rgba(212,175,55,0.1);
-}
+.gallery-section { padding: 22px 16px 36px; border-top: 1px solid rgba(212,175,55,0.1); }
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
-  gap: 8px;
-  max-width: 800px;
-  margin: 18px auto 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+  gap: 8px; max-width: 800px; margin: 16px auto 0;
 }
 .gallery-grid img {
-  width: 100%; height: 130px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid rgba(212,175,55,0.1);
-  transition: transform 0.3s, border-color 0.3s;
+  width: 100%; height: 130px; object-fit: cover; border-radius: 10px;
+  border: 1px solid rgba(212,175,55,0.1); transition: transform 0.3s, border-color 0.3s;
 }
-.gallery-grid img:hover { transform: scale(1.03); border-color: var(--gold-border); }
+.gallery-grid img:hover { transform: scale(1.04); border-color: var(--gold-border); }
 
 /* ── FOOTER ── */
-.footer {
-  padding: 24px 20px;
-  border-top: 1px solid rgba(212,175,55,0.1);
-  background: var(--bg);
-}
-.footer-names {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-.footer-sub {
-  font-size: 14px;
-  color: var(--muted);
-  letter-spacing: 0.1em;
-}
+.footer { padding: 18px 20px; border-top: 1px solid rgba(212,175,55,0.1); }
+.footer-names { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold); margin-bottom: 3px; }
+.footer-sub { font-size: 13px; color: var(--muted); letter-spacing: 0.1em; }
 
 /* ── PETALS ── */
 .petal {
-  position: fixed; top: -10px;
-  width: 10px; height: 10px;
+  position: fixed; top: -10px; border-radius: 50% 50% 50% 0;
+  opacity: 0.75; transform: rotate(45deg); pointer-events: none; z-index: 0;
   background: radial-gradient(circle at 30% 30%, #ffd6e7, #ff7aa8);
-  border-radius: 50% 50% 50% 0;
-  opacity: 0.75;
-  transform: rotate(45deg);
-  pointer-events: none;
-  z-index: 0;
 }
 @keyframes fall {
   0%   { transform: translateY(-10px) rotate(45deg) translateX(0); opacity: 0.85; }
-  50%  { transform: translateY(50vh) rotate(225deg) translateX(20px); }
-  100% { transform: translateY(110vh) rotate(405deg) translateX(-10px); opacity: 0.4; }
+  50%  { transform: translateY(50vh) rotate(225deg) translateX(18px); }
+  100% { transform: translateY(110vh) rotate(405deg) translateX(-10px); opacity: 0.3; }
 }
+@keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── RESPONSIVE ── */
 @media (max-width: 420px) {
-  .count-box { min-width: 58px; padding: 10px 6px 8px; }
   .count-number { font-size: 26px; }
-  .hero-names { font-size: clamp(1.8rem, 9vw, 3rem); }
+  .count-box { min-width: 62px; }
+  .hero-names { font-size: clamp(2rem, 10vw, 3rem); }
+  .d-val.big { font-size: 17px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
 </head>
 
 <body>
 
-<!-- ── FLOATING NAV ── -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-lang">
     <button class="active" id="btnEN" onclick="setLang('en')">EN</button>
     <button id="btnCN" onclick="setLang('cn')">中文</button>
   </div>
-  <div class="nav-music" id="musicBtn" onclick="toggleMusic()" title="Music">🎵</div>
+  <div class="nav-music" id="musicBtn" onclick="toggleMusic()">🎵</div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -481,349 +308,187 @@ body {
   </div>
 </section>
 
-<!-- ── COUNTDOWN ── -->
+<!-- COUNTDOWN -->
 <div class="countdown-section">
-  <p class="section-eyebrow" id="cdEyebrow">Counting down to the big day</p>
+  <span class="section-eyebrow" id="cdLabel">Counting down to the big day</span>
   <div class="countdown">
-    <div class="count-box"><span class="count-number" id="cdDays">--</span><span class="count-label" data-en="Days" data-cn="天">Days</span></div>
-    <div class="count-box"><span class="count-number" id="cdHours">--</span><span class="count-label" data-en="Hours" data-cn="时">Hours</span></div>
-    <div class="count-box"><span class="count-number" id="cdMins">--</span><span class="count-label" data-en="Mins" data-cn="分">Mins</span></div>
-    <div class="count-box"><span class="count-number" id="cdSecs">--</span><span class="count-label" data-en="Secs" data-cn="秒">Secs</span></div>
+    <div class="count-box"><span class="count-number" id="cdDays">--</span><span class="count-label" id="lDays">Days</span></div>
+    <div class="count-box"><span class="count-number" id="cdHours">--</span><span class="count-label" id="lHours">Hours</span></div>
+    <div class="count-box"><span class="count-number" id="cdMins">--</span><span class="count-label" id="lMins">Mins</span></div>
+    <div class="count-box"><span class="count-number" id="cdSecs">--</span><span class="count-label" id="lSecs">Secs</span></div>
   </div>
 </div>
 
-<!-- ══════════════ ENGLISH ══════════════ -->
-<div id="en">
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="content">
 
-  <!-- Invited -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">The Invitation</p>
-      <h2 class="section-title">💍 You're Invited</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📅</div>
-        <div class="detail-text">
-          <span class="detail-label">Date</span>
-          <span class="detail-value big">Saturday, 27th June 2026</span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🕙</div>
-        <div class="detail-text">
-          <span class="detail-label">Time</span>
-          <span class="detail-value big">10:00 AM<em>Doors open at 9:30 AM</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">👗</div>
-        <div class="detail-text">
-          <span class="detail-label">Dress Code</span>
-          <span class="detail-value"><span class="coming-soon">To be announced</span></span>
-        </div>
+  <!-- EN: Single compact card with all info -->
+  <div class="info-card" id="enCard">
+
+    <div class="card-section-label"><span>Ceremony Details</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">📅</div>
+      <div class="d-body">
+        <span class="d-label">Date & Time</span>
+        <span class="d-val big">Saturday, 27 June 2026 · 10:00 AM</span>
       </div>
     </div>
+
+    <div class="detail-row">
+      <div class="d-icon">🏯</div>
+      <div class="d-body">
+        <span class="d-label">Venue</span>
+        <span class="d-val">茧云宫 Kian Hoon Kiong Temple
+          <small>Jalan Padang Lalang, 84900 Tangkak, Johor</small>
+          <small><a href="https://maps.app.goo.gl/Sv9Wp43TGumvA86e9" target="_blank">📍 Open in Google Maps →</a></small>
+        </span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>Dress Code</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">👘</div>
+      <div class="d-body">
+        <span class="d-label">Attire</span>
+        <span class="d-val">Traditional <small>or anything you look best in</small></span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>After the Ceremony</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">🍜</div>
+      <div class="d-body">
+        <span class="d-label">Celebration Lunch</span>
+        <span class="d-val big">1:00 PM<small class="dim">Venue TBC — details to follow</small></span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>Watch Online</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">📺</div>
+      <div class="d-body">
+        <span class="d-label">Facebook Live</span>
+        <span class="d-val"><a href="https://www.facebook.com/events/26155045804105255/" target="_blank">Join the Live Stream →</a></span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>RSVP By 20 June 2026</span></div>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="name">Hong Aun · 鸿安</span>
+        <span class="num">+60 17-799 8065</span>
+        <span class="num">+65 8683-5537</span>
+      </div>
+      <div class="contact-item">
+        <span class="name">Sheen Yie · 欣怡</span>
+        <span class="num">+60 11-1199 5230</span>
+        <span class="num">+65 8783-5230</span>
+      </div>
+    </div>
+
+  </div><!-- /enCard -->
+
+  <!-- CN: Same card in Chinese -->
+  <div class="info-card" id="cnCard" style="display:none;">
+
+    <div class="card-section-label"><span>典礼详情</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">📅</div>
+      <div class="d-body">
+        <span class="d-label">日期与时间</span>
+        <span class="d-val big">2026年6月27日（星期六） · 上午 10:00</span>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="d-icon">🏯</div>
+      <div class="d-body">
+        <span class="d-label">地点</span>
+        <span class="d-val">茧云宫 Kian Hoon Kiong Temple
+          <small>Jalan Padang Lalang, 84900 Tangkak, Johor</small>
+          <small><a href="https://maps.app.goo.gl/Sv9Wp43TGumvA86e9" target="_blank">📍 打开谷歌地图 →</a></small>
+        </span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>着装要求</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">👘</div>
+      <div class="d-body">
+        <span class="d-label">服装</span>
+        <span class="d-val">传统服饰 <small>或您最漂亮的一套</small></span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>典礼后庆祝</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">🍜</div>
+      <div class="d-body">
+        <span class="d-label">庆祝午宴</span>
+        <span class="d-val big">下午 1:00<small class="dim">地点待定 — 详情稍后公布</small></span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>线上观看</span></div>
+
+    <div class="detail-row">
+      <div class="d-icon">📺</div>
+      <div class="d-body">
+        <span class="d-label">Facebook 直播</span>
+        <span class="d-val"><a href="https://www.facebook.com/events/26155045804105255/" target="_blank">点击观看直播 →</a></span>
+      </div>
+    </div>
+
+    <div class="card-sep"></div>
+    <div class="card-section-label"><span>请于2026年6月20日前回复</span></div>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="name">鸿安</span>
+        <span class="num">+60 17-799 8065</span>
+        <span class="num">+65 8683-5537</span>
+      </div>
+      <div class="contact-item">
+        <span class="name">欣怡</span>
+        <span class="num">+60 11-1199 5230</span>
+        <span class="num">+65 8783-5230</span>
+      </div>
+    </div>
+
+  </div><!-- /cnCard -->
+
+  <!-- RSVP button -->
+  <div class="rsvp-card" id="rsvpCard">
+    <p id="rsvpText">Confirm your attendance — it only takes a minute! 🌸</p>
+    <a class="btn-rsvp" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank" id="rsvpBtn">✦ RSVP Now</a>
   </div>
 
-  <!-- Venue -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">Location</p>
-      <h2 class="section-title">📍 Venue</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🏯</div>
-        <div class="detail-text">
-          <span class="detail-label">Temple</span>
-          <span class="detail-value">茧云宫 Kian Hoon Kiong Temple<em>Jalan Padang Lalang, Kampung Padang Lalang, 84900 Tangkak, Johor Darul Ta'zim</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🗺️</div>
-        <div class="detail-text">
-          <span class="detail-label">Navigation</span>
-          <span class="detail-value"><a href="https://maps.app.goo.gl/Sv9Wp43TGumvA86e9" target="_blank">Open in Google Maps</a></span>
-        </div>
-      </div>
-    </div>
-  </div>
+</div><!-- /content -->
 
-  <!-- Contact & RSVP -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">Get In Touch</p>
-      <h2 class="section-title">📞 Contact & RSVP</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">⏰</div>
-        <div class="detail-text">
-          <span class="detail-label">RSVP Deadline</span>
-          <span class="detail-value big">20th June 2026</span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📱</div>
-        <div class="detail-text">
-          <span class="detail-label">Hong Aun · 鸿安</span>
-          <span class="detail-value">+60 17-799 8065<em>+65 8683-5537</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📱</div>
-        <div class="detail-text">
-          <span class="detail-label">Sheen Yie · 欣怡</span>
-          <span class="detail-value">+60 11-1199 5230<em>+65 8783-5230</em></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RSVP Form -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">Confirm Attendance</p>
-      <h2 class="section-title">💌 RSVP</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="rsvp-card">
-      <p>Tap below to confirm your attendance — it only takes a minute! 🌸</p>
-      <a class="btn-rsvp" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank">
-        ✦ RSVP Now
-      </a>
-    </div>
-  </div>
-
-  <!-- Live Stream -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">Watch Online</p>
-      <h2 class="section-title">📺 Live Stream</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📡</div>
-        <div class="detail-text">
-          <span class="detail-label">Platform</span>
-          <span class="detail-value">Facebook Live<em>Can't attend in person? Watch online!</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🔗</div>
-        <div class="detail-text">
-          <span class="detail-label">Stream Link</span>
-          <span class="detail-value"><span class="coming-soon">Link will be shared closer to the date</span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Lunch -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">After the Ceremony</p>
-      <h2 class="section-title">🍽️ Celebration Lunch</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🕐</div>
-        <div class="detail-text">
-          <span class="detail-label">Time</span>
-          <span class="detail-value big">1:00 PM</span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🍜</div>
-        <div class="detail-text">
-          <span class="detail-label">Venue</span>
-          <span class="detail-value">Lunch Celebration<em><span class="coming-soon">Venue TBC — details to follow</span></em></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /en -->
-
-<!-- ══════════════ CHINESE ══════════════ -->
-<div id="cn" style="display:none;">
-
-  <!-- Invited -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">诚挚邀请</p>
-      <h2 class="section-title">💍 邀请函</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📅</div>
-        <div class="detail-text">
-          <span class="detail-label">日期</span>
-          <span class="detail-value big">2026年6月27日（星期六）</span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🕙</div>
-        <div class="detail-text">
-          <span class="detail-label">时间</span>
-          <span class="detail-value big">上午 10:00<em>9:30 开始入场</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">👗</div>
-        <div class="detail-text">
-          <span class="detail-label">着装要求</span>
-          <span class="detail-value"><span class="coming-soon">即将公布</span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Venue -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">仪式地点</p>
-      <h2 class="section-title">📍 地点</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🏯</div>
-        <div class="detail-text">
-          <span class="detail-label">庙宇</span>
-          <span class="detail-value">茧云宫 Kian Hoon Kiong Temple<em>Jalan Padang Lalang, Kampung Padang Lalang, 84900 Tangkak, Johor</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🗺️</div>
-        <div class="detail-text">
-          <span class="detail-label">导航</span>
-          <span class="detail-value"><a href="https://maps.app.goo.gl/Sv9Wp43TGumvA86e9" target="_blank">打开谷歌地图</a></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contact -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">联系方式</p>
-      <h2 class="section-title">📞 联系 & 回复</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">⏰</div>
-        <div class="detail-text">
-          <span class="detail-label">回复截止日期</span>
-          <span class="detail-value big">2026年6月20日</span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📱</div>
-        <div class="detail-text">
-          <span class="detail-label">鸿安</span>
-          <span class="detail-value">+60 17-799 8065<em>+65 8683-5537</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📱</div>
-        <div class="detail-text">
-          <span class="detail-label">欣怡</span>
-          <span class="detail-value">+60 11-1199 5230<em>+65 8783-5230</em></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RSVP -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">确认出席</p>
-      <h2 class="section-title">💌 出席回复</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="rsvp-card">
-      <p>点击下方按钮填写 RSVP 表格，只需一分钟 🌸</p>
-      <a class="btn-rsvp" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank">
-        ✦ 立即填写
-      </a>
-    </div>
-  </div>
-
-  <!-- Live Stream -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">线上观看</p>
-      <h2 class="section-title">📺 线上直播</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">📡</div>
-        <div class="detail-text">
-          <span class="detail-label">平台</span>
-          <span class="detail-value">Facebook 直播<em>无法亲临现场？欢迎线上观看！</em></span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🔗</div>
-        <div class="detail-text">
-          <span class="detail-label">直播链接</span>
-          <span class="detail-value"><span class="coming-soon">活动前将公布链接</span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Lunch -->
-  <div class="section">
-    <div class="section-header">
-      <p class="section-eyebrow">典礼后庆祝</p>
-      <h2 class="section-title">🍽️ 庆祝午宴</h2>
-      <div class="gold-divider wide"></div>
-    </div>
-    <div class="detail-card">
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🕐</div>
-        <div class="detail-text">
-          <span class="detail-label">时间</span>
-          <span class="detail-value big">下午 1:00</span>
-        </div>
-      </div>
-      <div class="detail-row">
-        <div class="detail-icon-wrap">🍜</div>
-        <div class="detail-text">
-          <span class="detail-label">地点</span>
-          <span class="detail-value">午宴庆祝<em><span class="coming-soon">地点待定 — 详情稍后公布</span></em></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /cn -->
-
-<!-- ── GALLERY ── -->
+<!-- GALLERY -->
 <div class="gallery-section">
-  <p class="section-eyebrow">Our Moments · 美好瞬间</p>
-  <h2 class="section-title" style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:22px;">📸 Gallery</h2>
-  <div class="gold-divider wide"></div>
+  <span class="section-eyebrow">Our Moments · 美好瞬间</span>
   <div class="gallery-grid">
-    <img src="photo1.jpg" alt="">
-    <img src="photo2.jpg" alt="">
-    <img src="photo3.jpg" alt="">
-    <img src="photo4.jpg" alt="">
+    <img src="photo1.jpg" alt=""><img src="photo2.jpg" alt="">
+    <img src="photo3.jpg" alt=""><img src="photo4.jpg" alt="">
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
 <footer class="footer">
   <p class="footer-names">Tee Hong Aun &amp; Pang Sheen Yie</p>
   <p class="footer-sub">27 · 06 · 2026 &nbsp;·&nbsp; 茧云宫, Tangkak</p>
@@ -835,117 +500,101 @@ body {
 
 <script>
 /* ── Language ── */
-let currentLang = 'en';
+const t = {
+  eyebrow:  { en: 'Registration of Marriage',      cn: '结婚注册典礼' },
+  day:      { en: 'Saturday',                       cn: '星期六' },
+  cd:       { en: 'Counting down to the big day',  cn: '距离大喜之日' },
+  days:     { en: 'Days',   cn: '天' },
+  hours:    { en: 'Hours',  cn: '时' },
+  mins:     { en: 'Mins',   cn: '分' },
+  secs:     { en: 'Secs',   cn: '秒' },
+  rsvpTxt:  { en: 'Confirm your attendance — it only takes a minute! 🌸', cn: '点击下方按钮填写 RSVP 表格，只需一分钟 🌸' },
+  rsvpBtn:  { en: '✦ RSVP Now', cn: '✦ 立即填写' },
+};
+
 function setLang(lang) {
-  currentLang = lang;
-  document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
-  document.getElementById('cn').style.display = lang === 'cn' ? 'block' : 'none';
-  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
-  document.getElementById('btnCN').classList.toggle('active', lang === 'cn');
-  // Update data-en/data-cn elements
-  document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.cn;
-  });
-  document.getElementById('cdEyebrow').textContent =
-    lang === 'en' ? 'Counting down to the big day' : '距离大喜之日';
-  // Re-observe new sections
-  document.querySelectorAll('#' + lang + ' .section').forEach(sec => observer.observe(sec));
+  const isCN = lang === 'cn';
+  document.getElementById('enCard').style.display = isCN ? 'none' : 'block';
+  document.getElementById('cnCard').style.display = isCN ? 'block' : 'none';
+  document.getElementById('btnEN').classList.toggle('active', !isCN);
+  document.getElementById('btnCN').classList.toggle('active', isCN);
+  document.getElementById('heroEyebrow').textContent = t.eyebrow[lang];
+  document.getElementById('heroDay').textContent     = t.day[lang];
+  document.getElementById('cdLabel').textContent     = t.cd[lang];
+  document.getElementById('lDays').textContent       = t.days[lang];
+  document.getElementById('lHours').textContent      = t.hours[lang];
+  document.getElementById('lMins').textContent       = t.mins[lang];
+  document.getElementById('lSecs').textContent       = t.secs[lang];
+  document.getElementById('rsvpText').textContent    = t.rsvpTxt[lang];
+  document.getElementById('rsvpBtn').textContent     = t.rsvpBtn[lang];
+  // Re-trigger show animation on switched card
+  const card = document.getElementById(isCN ? 'cnCard' : 'enCard');
+  card.classList.remove('show');
+  setTimeout(() => card.classList.add('show'), 50);
 }
 
 /* ── Music ── */
 let musicPlaying = false;
 const music = document.getElementById('bgMusic');
-
+function fadeVol(from, to, cb) {
+  const steps = 20, diff = (to - from) / steps; let i = 0;
+  const timer = setInterval(() => {
+    music.volume = Math.min(1, Math.max(0, from + diff * i));
+    if (++i >= steps) { clearInterval(timer); if (cb) cb(); }
+  }, 60);
+}
 function tryAutoplay() {
   if (musicPlaying) return;
   music.volume = 0;
   music.play().then(() => {
     musicPlaying = true;
     document.getElementById('musicBtn').textContent = '⏸';
-    fadeVolume(0, 0.45);
-    ['click','scroll','touchstart','keydown'].forEach(e =>
-      document.removeEventListener(e, tryAutoplay));
+    fadeVol(0, 0.45);
+    ['click','scroll','touchstart','keydown'].forEach(e => document.removeEventListener(e, tryAutoplay));
   }).catch(() => {});
 }
-['click','scroll','touchstart','keydown'].forEach(e =>
-  document.addEventListener(e, tryAutoplay, { passive: true }));
-
+['click','scroll','touchstart','keydown'].forEach(e => document.addEventListener(e, tryAutoplay, { passive: true }));
 function toggleMusic() {
   if (musicPlaying) {
-    fadeVolume(music.volume, 0, () => { music.pause(); });
+    fadeVol(music.volume, 0, () => music.pause());
     musicPlaying = false;
     document.getElementById('musicBtn').textContent = '🎵';
   } else {
     music.volume = 0;
-    music.play().then(() => {
-      musicPlaying = true;
-      document.getElementById('musicBtn').textContent = '⏸';
-      fadeVolume(0, 0.45);
-    });
+    music.play().then(() => { musicPlaying = true; document.getElementById('musicBtn').textContent = '⏸'; fadeVol(0, 0.45); });
   }
-}
-
-function fadeVolume(from, to, cb) {
-  const steps = 20;
-  const diff = (to - from) / steps;
-  let i = 0;
-  const t = setInterval(() => {
-    music.volume = Math.min(1, Math.max(0, from + diff * i));
-    if (++i >= steps) { clearInterval(t); if (cb) cb(); }
-  }, 60);
 }
 
 /* ── Countdown ── */
-function updateCountdown() {
-  const target = new Date('2026-06-27T10:00:00+08:00');
-  const now = new Date();
-  const diff = target - now;
-  if (diff <= 0) {
-    ['Days','Hours','Mins','Secs'].forEach((_, i) => {
-      ['cdDays','cdHours','cdMins','cdSecs'][i];
-    });
-    document.getElementById('cdDays').textContent =
-    document.getElementById('cdHours').textContent =
-    document.getElementById('cdMins').textContent =
-    document.getElementById('cdSecs').textContent = '00';
-    return;
-  }
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
-  document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
-  document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
+function tick() {
+  const diff = new Date('2026-06-27T10:00:00+08:00') - new Date();
+  if (diff <= 0) { ['cdDays','cdHours','cdMins','cdSecs'].forEach(id => document.getElementById(id).textContent = '00'); return; }
+  document.getElementById('cdDays').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cdHours').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cdMins').textContent  = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('cdSecs').textContent  = String(Math.floor(diff%60000/1000)).padStart(2,'0');
 }
-updateCountdown();
-setInterval(updateCountdown, 1000);
+tick(); setInterval(tick, 1000);
 
 /* ── Petals ── */
 function createPetal() {
-  const p = document.createElement('div');
-  p.className = 'petal';
-  p.style.left = Math.random() * window.innerWidth + 'px';
-  const dur = 6 + Math.random() * 6;
-  p.style.animation = `fall ${dur}s linear`;
-  p.style.width = p.style.height = (8 + Math.random() * 8) + 'px';
-  document.body.appendChild(p);
-  setTimeout(() => p.remove(), dur * 1000);
+  const p = document.createElement('div'); p.className = 'petal';
+  const sz = 8 + Math.random() * 8;
+  p.style.cssText = `left:${Math.random()*100}vw;width:${sz}px;height:${sz}px;animation:fall ${6+Math.random()*6}s linear`;
+  document.body.appendChild(p); setTimeout(() => p.remove(), 12000);
 }
-setInterval(createPetal, 400);
+setInterval(createPetal, 450);
 
-/* ── Scroll: parallax + reveal ── */
-const observer = new IntersectionObserver(entries => {
+/* ── Scroll reveal ── */
+const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.section').forEach(s => observer.observe(s));
+}, { threshold: 0.1 });
+document.querySelectorAll('.info-card, .rsvp-card').forEach(el => obs.observe(el));
 
 window.addEventListener('scroll', () => {
   const img = document.getElementById('heroImg');
   if (img) img.style.transform = `scale(1.06) translateY(${window.scrollY * 0.18}px)`;
 }, { passive: true });
 </script>
-
 </body>
 </html>
