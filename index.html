@@ -3,397 +3,944 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROM - Tee Hong Aun & Pang Sheen Yie</title>
+<title>ROM — Tee Hong Aun & Pang Sheen Yie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@400;500&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-html {
-    scroll-behavior: smooth;
+/* ── RESET & ROOT ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --gold: #d4af37;
+  --gold-dark: #b8962e;
+  --gold-dim: rgba(212,175,55,0.18);
+  --gold-border: rgba(212,175,55,0.35);
+  --bg: #080809;
+  --card: #111113;
+  --card2: #161618;
+  --text: #f0f0f2;
+  --muted: rgba(240,240,242,0.55);
+  --sage: #7a8c6e;
 }
+
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    background: #fafafa;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
 }
 
+/* ── FLOATING NAV ── */
+.nav {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+  background: rgba(8,8,9,0.72);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 40px;
+  padding: 7px 10px;
+}
+.nav-lang {
+  display: flex;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px solid var(--gold-border);
+}
+.nav-lang button {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  padding: 6px 14px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-lang button.active { background: var(--gold); color: #000; font-weight: 600; }
+.nav-music {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(212,175,55,0.1);
+  border: 1px solid var(--gold-border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 17px;
+  transition: background 0.2s;
+}
+.nav-music:hover { background: rgba(212,175,55,0.2); }
+
+/* ── HERO ── */
 .hero {
-    position: relative;
-    overflow: hidden;
-    background: black;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
 }
-
 .hero img {
-    width: 100%;
-    height: 80vh;
-    object-fit: cover;
-    filter: brightness(50%);
-    max-width: 100%;
-    display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(45%);
+  transform: scale(1.06);
+  transition: transform 0.1s linear;
+  display: block;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0) 30%,
+    rgba(8,8,9,0.6) 75%,
+    rgba(8,8,9,0.95) 100%);
+  pointer-events: none;
+}
+.hero-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0 24px 48px;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  animation: fadeUp 1.2s 0.2s both;
+}
+.hero-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 9vw, 4.8rem);
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 6px;
+  animation: fadeUp 1.2s 0.4s both;
+}
+.hero-names .amp {
+  font-style: italic;
+  color: var(--gold);
+  display: inline;
+}
+.hero-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 18px;
+  animation: fadeUp 1.2s 0.55s both;
+}
+.hero-date-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--gold-border);
+  border-radius: 40px;
+  padding: 8px 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  margin-bottom: 24px;
+  animation: fadeUp 1.2s 0.7s both;
+}
+.hero-date-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.6; }
+
+/* QR in hero */
+.hero-qr {
+  display: inline-block;
+  background: white;
+  padding: 8px;
+  border-radius: 10px;
+  animation: fadeUp 1.2s 0.9s both;
+}
+.hero-qr img { display: block; border-radius: 4px; }
+
+/* ── COUNTDOWN ── */
+.countdown-section {
+  padding: 36px 20px 28px;
+  background: linear-gradient(180deg, var(--bg) 0%, #0e0e10 100%);
+}
+.section-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+.count-box {
+  background: var(--card);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 14px 10px 10px;
+  min-width: 76px;
+  box-shadow: 0 0 20px rgba(212,175,55,0.07), inset 0 1px 0 rgba(212,175,55,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.count-box:hover { transform: translateY(-3px); box-shadow: 0 0 28px rgba(212,175,55,0.18); }
+.count-number {
+  font-family: 'Cinzel', serif;
+  font-size: 34px;
+  font-weight: 500;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(212,175,55,0.5);
+  line-height: 1;
+  display: block;
+}
+.count-label {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+  display: block;
 }
 
-.overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+/* ── GOLD DIVIDER ── */
+.gold-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 10px auto 0;
+  opacity: 0.5;
 }
+.gold-divider.wide { width: 140px; }
 
+/* ── SECTIONS ── */
 .section {
-    padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 26px 20px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.show { opacity: 1; transform: translateY(0); }
+
+.section-header {
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+.section-title .icon { margin-right: 6px; }
+
+/* ── DETAIL CARD ── */
+.detail-card {
+  background: var(--card);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 6px 0;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.05) inset;
 }
 
-.button {
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 10px;
-    background: #d4af37;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 20px;
+  border-bottom: 1px solid rgba(212,175,55,0.08);
+  transition: background 0.2s;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-row:hover { background: rgba(212,175,55,0.04); }
+
+.detail-icon-wrap {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
-.toggle-btn {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.6);
-    color: white;
-    padding: 10px 18px;
-    cursor: pointer;
-    border-radius: 20px;
-    z-index: 3;
-    font-size: 14px;
+.detail-text { flex: 1; min-width: 0; }
+.detail-label {
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+  font-family: 'Cinzel', serif;
 }
-/* FADE IN SECTIONS */
-.section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease;
+.detail-value {
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 400;
+}
+.detail-value em {
+  display: block;
+  font-style: normal;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.detail-value a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+.detail-value a::after { content: '→'; font-style: normal; }
+.detail-value a:hover { color: #fff; }
+.detail-value .coming-soon {
+  font-size: 14px;
+  color: rgba(255,255,255,0.3);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
 }
 
-.section.show {
-    opacity: 1;
-    transform: translateY(0);
+/* Highlighted "big" value */
+.detail-value.big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
 }
 
-/* HERO TEXT ANIMATION */
-.overlay h1 {
-    animation: fadeUp 1.5s ease forwards;
+/* ── RSVP BUTTON ── */
+.rsvp-card {
+  background: var(--card);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.rsvp-card p {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.btn-rsvp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 30px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #000;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 40px;
+  box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-rsvp:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 28px rgba(212,175,55,0.45); }
+.btn-rsvp:active { transform: scale(0.98); }
+
+/* ── GALLERY ── */
+.gallery-section {
+  padding: 28px 20px 40px;
+  background: var(--card2);
+  border-top: 1px solid rgba(212,175,55,0.1);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+  gap: 8px;
+  max-width: 800px;
+  margin: 18px auto 0;
+}
+.gallery-grid img {
+  width: 100%; height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(212,175,55,0.1);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.gallery-grid img:hover { transform: scale(1.03); border-color: var(--gold-border); }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 24px 20px;
+  border-top: 1px solid rgba(212,175,55,0.1);
+  background: var(--bg);
+}
+.footer-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.footer-sub {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
 }
 
-.overlay p {
-    animation: fadeUp 2s ease forwards;
+/* ── PETALS ── */
+.petal {
+  position: fixed; top: -10px;
+  width: 10px; height: 10px;
+  background: radial-gradient(circle at 30% 30%, #ffd6e7, #ff7aa8);
+  border-radius: 50% 50% 50% 0;
+  opacity: 0.75;
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: 0;
 }
-
-@keyframes fadeUp {
-    from { opacity:0; transform: translateY(20px); }
-    to { opacity:1; transform: translateY(0); }
-}
-
-/* LUXURY ENHANCEMENTS */
-body { background:#000; color:#fff; }
-.hero { height:100vh; }
-.hero img { height:100vh; filter: brightness(60%); }
-.overlay { backdrop-filter: blur(8px); background: rgba(0,0,0,0.25); padding: 25px 30px; border-radius: 12px; }
-.button { background: linear-gradient(135deg,#d4af37,#b8962e); box-shadow:0 4px 15px rgba(0,0,0,0.3); }
-.button:hover { opacity:0.9; }
- .countdown {
-     display: flex;
-     justify-content: center;
-     gap: 15px;
-     margin-top: 25px;
- }
-
- .count-box {
-     background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-     border: 1px solid rgba(255,215,0,0.4);
-     border-radius: 14px;
-     padding: 12px 14px;
-     min-width: 70px;
-     backdrop-filter: blur(10px);
-     box-shadow: 0 0 15px rgba(212,175,55,0.4);
-     transition: transform 0.3s ease, box-shadow 0.3s ease;
- }
-
- .count-box:hover {
-     transform: translateY(-3px) scale(1.05);
-     box-shadow: 0 0 25px rgba(212,175,55,0.7);
- }
-
- .count-number {
-     font-size: 26px;
-     font-weight: bold;
-     color: #ffd700;
-     text-shadow: 0 0 8px rgba(255,215,0,0.8);
-     transition: all 0.3s ease;
- }
-
- .count-label {
-     font-size: 11px;
-     opacity: 0.9;
-     letter-spacing: 1px;
- }
-canvas { position:fixed; top:0; left:0; z-index:0; }
-.hero, .overlay { position:relative; z-index:1; }
-
-/* PETALS */
-.petal { position: fixed; top: -10px; width: 12px; height: 12px; background: radial-gradient(circle at 30% 30%, #ffd6e7, #ff7aa8); border-radius: 50% 50% 50% 0; opacity: 0.8; transform: rotate(45deg); pointer-events:none; z-index:0; }
 @keyframes fall {
-  0% { transform: translateY(-10px) rotate(45deg); opacity: 0.9; }
-  100% { transform: translateY(110vh) rotate(405deg); opacity: 0.6; }
+  0%   { transform: translateY(-10px) rotate(45deg) translateX(0); opacity: 0.85; }
+  50%  { transform: translateY(50vh) rotate(225deg) translateX(20px); }
+  100% { transform: translateY(110vh) rotate(405deg) translateX(-10px); opacity: 0.4; }
 }
 
-/* GALLERY */
-.gallery { padding: 40px 20px; background:#000; }
-.gallery-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:10px; max-width:900px; margin:0 auto; }
-.gallery-grid img { width:100%; height:140px; object-fit:cover; border-radius:10px; }
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-/* MUSIC BTN */
-.music-btn { position: fixed; left: 15px; top: 15px; background: rgba(0,0,0,0.6); color:#fff; padding:10px; border-radius:6px; cursor:pointer; z-index:2; }
+/* ── RESPONSIVE ── */
+@media (max-width: 420px) {
+  .count-box { min-width: 58px; padding: 10px 6px 8px; }
+  .count-number { font-size: 26px; }
+  .hero-names { font-size: clamp(1.8rem, 9vw, 3rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
-
-<script>
-function toggleLang() {
-    let en = document.getElementById("en");
-    let cn = document.getElementById("cn");
-
-    if (en.style.display === "none") {
-        en.style.display = "block";
-        cn.style.display = "none";
-    } else {
-        en.style.display = "none";
-        cn.style.display = "block";
-    }
-}
-</script>
-
 </head>
 
-<body onload="enableAutoPlayOnce()">
+<body>
 
-<canvas id="particles"></canvas>
+<!-- ── FLOATING NAV ── -->
+<nav class="nav">
+  <div class="nav-lang">
+    <button class="active" id="btnEN" onclick="setLang('en')">EN</button>
+    <button id="btnCN" onclick="setLang('cn')">中文</button>
+  </div>
+  <div class="nav-music" id="musicBtn" onclick="toggleMusic()" title="Music">🎵</div>
+</nav>
 
-<div class="toggle-btn" onclick="toggleLang()">中文 / EN</div>
-<div class="music-btn" onclick="toggleMusic()">🎵 Music</div>
-
-<div class="hero">
-    <!-- IMPORTANT: Put image in SAME folder -->
-    <img src="photo.jpg" alt="Couple">
-
-    <div class="overlay">
-        <h1>Tee Hong Aun & Pang Sheen Yie</h1>
-        <p>27 June 2026 • 10:00 AM</p>
-        <br>
-        <img width="120" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://forms.gle/E4uDsY7RX2Z1GBa17">
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <img src="photo.jpg" alt="Tee Hong Aun & Pang Sheen Yie" id="heroImg">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-en="Registration of Marriage" data-cn="结婚注册典礼">Registration of Marriage</p>
+    <h1 class="hero-names">Tee Hong Aun <span class="amp">&amp;</span><br>Pang Sheen Yie</h1>
+    <p class="hero-zh">郑鸿安 &amp; 彭欣怡</p>
+    <div class="hero-date-pill">
+      <span data-en="Saturday" data-cn="星期六">Saturday</span>
+      <span class="hero-date-sep"></span>
+      <span>27 June 2026</span>
+      <span class="hero-date-sep"></span>
+      <span>10:00 AM</span>
     </div>
+    <br>
+    <div class="hero-qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=https://forms.gle/E4uDsY7RX2Z1GBa17&color=080809&bgcolor=ffffff&margin=2" width="90" height="90" alt="RSVP QR">
+    </div>
+  </div>
+</section>
+
+<!-- ── COUNTDOWN ── -->
+<div class="countdown-section">
+  <p class="section-eyebrow" id="cdEyebrow">Counting down to the big day</p>
+  <div class="countdown">
+    <div class="count-box"><span class="count-number" id="cdDays">--</span><span class="count-label" data-en="Days" data-cn="天">Days</span></div>
+    <div class="count-box"><span class="count-number" id="cdHours">--</span><span class="count-label" data-en="Hours" data-cn="时">Hours</span></div>
+    <div class="count-box"><span class="count-number" id="cdMins">--</span><span class="count-label" data-en="Mins" data-cn="分">Mins</span></div>
+    <div class="count-box"><span class="count-number" id="cdSecs">--</span><span class="count-label" data-en="Secs" data-cn="秒">Secs</span></div>
+  </div>
 </div>
 
+<!-- ══════════════ ENGLISH ══════════════ -->
 <div id="en">
+
+  <!-- Invited -->
   <div class="section">
-    <h2>💍 You're Invited</h2>
-    <p>Join us for our ROM ceremony</p>
+    <div class="section-header">
+      <p class="section-eyebrow">The Invitation</p>
+      <h2 class="section-title">💍 You're Invited</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📅</div>
+        <div class="detail-text">
+          <span class="detail-label">Date</span>
+          <span class="detail-value big">Saturday, 27th June 2026</span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🕙</div>
+        <div class="detail-text">
+          <span class="detail-label">Time</span>
+          <span class="detail-value big">10:00 AM<em>Doors open at 9:30 AM</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">👗</div>
+        <div class="detail-text">
+          <span class="detail-label">Dress Code</span>
+          <span class="detail-value"><span class="coming-soon">To be announced</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Venue -->
   <div class="section">
-    <h2>📍 Venue</h2>
-    <p><b>茧云宫 Kian Hoon Kiong Temple</b></p>
-    <p>Jalan Padang Lalang, Kampung Padang Lalang,<br>84900 Tangkak, Johor Darul Ta'zim</p>
-    <a class="button" href="https://maps.app.goo.gl/iPYTMqg9r8xZaocq5" target="_blank">Open in Google Maps</a>
+    <div class="section-header">
+      <p class="section-eyebrow">Location</p>
+      <h2 class="section-title">📍 Venue</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🏯</div>
+        <div class="detail-text">
+          <span class="detail-label">Temple</span>
+          <span class="detail-value">茧云宫 Kian Hoon Kiong Temple<em>Jalan Padang Lalang, Kampung Padang Lalang, 84900 Tangkak, Johor Darul Ta'zim</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🗺️</div>
+        <div class="detail-text">
+          <span class="detail-label">Navigation</span>
+          <span class="detail-value"><a href="https://maps.app.goo.gl/Sv9Wp43TGumvA86e9" target="_blank">Open in Google Maps</a></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Contact & RSVP -->
   <div class="section">
-    <h2>📞 Contact</h2>
-    <p><b>Kindly RSVP by 20th June 2026</b></p>
-    <p>Hong Aun: +60 17-799 8065 / +65 8683-5537</p>
-    <p>Sheen Yie: +60 11-1199 5230 / +65 8783-5230</p>
+    <div class="section-header">
+      <p class="section-eyebrow">Get In Touch</p>
+      <h2 class="section-title">📞 Contact & RSVP</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">⏰</div>
+        <div class="detail-text">
+          <span class="detail-label">RSVP Deadline</span>
+          <span class="detail-value big">20th June 2026</span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📱</div>
+        <div class="detail-text">
+          <span class="detail-label">Hong Aun · 鸿安</span>
+          <span class="detail-value">+60 17-799 8065<em>+65 8683-5537</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📱</div>
+        <div class="detail-text">
+          <span class="detail-label">Sheen Yie · 欣怡</span>
+          <span class="detail-value">+60 11-1199 5230<em>+65 8783-5230</em></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- RSVP Form -->
   <div class="section">
-    <h2>💌 Confirm Your Attendance</h2>
-    <p>Tap the button below to fill in our RSVP form — it only takes a minute! 🌸</p>
-    <a class="button" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank">RSVP Now</a>
+    <div class="section-header">
+      <p class="section-eyebrow">Confirm Attendance</p>
+      <h2 class="section-title">💌 RSVP</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="rsvp-card">
+      <p>Tap below to confirm your attendance — it only takes a minute! 🌸</p>
+      <a class="btn-rsvp" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank">
+        ✦ RSVP Now
+      </a>
+    </div>
   </div>
 
+  <!-- Live Stream -->
   <div class="section">
-    <h2>📺 Live Stream</h2>
-    <p>Can't make it in person? Join us live on Facebook!</p>
-    <p>Link will be shared closer to the date.</p>
+    <div class="section-header">
+      <p class="section-eyebrow">Watch Online</p>
+      <h2 class="section-title">📺 Live Stream</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📡</div>
+        <div class="detail-text">
+          <span class="detail-label">Platform</span>
+          <span class="detail-value">Facebook Live<em>Can't attend in person? Watch online!</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🔗</div>
+        <div class="detail-text">
+          <span class="detail-label">Stream Link</span>
+          <span class="detail-value"><span class="coming-soon">Link will be shared closer to the date</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Lunch -->
   <div class="section">
-    <h2>🍽 Following Celebration</h2>
-    <p>Lunch Celebration (venue TBC)</p>
-    <p>1:00 PM · Details to follow</p>
+    <div class="section-header">
+      <p class="section-eyebrow">After the Ceremony</p>
+      <h2 class="section-title">🍽️ Celebration Lunch</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🕐</div>
+        <div class="detail-text">
+          <span class="detail-label">Time</span>
+          <span class="detail-value big">1:00 PM</span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🍜</div>
+        <div class="detail-text">
+          <span class="detail-label">Venue</span>
+          <span class="detail-value">Lunch Celebration<em><span class="coming-soon">Venue TBC — details to follow</span></em></span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
+</div><!-- /en -->
+
+<!-- ══════════════ CHINESE ══════════════ -->
 <div id="cn" style="display:none;">
+
+  <!-- Invited -->
   <div class="section">
-    <h2>💍 邀请函</h2>
-    <p>诚邀您出席我们的注册结婚仪式</p>
+    <div class="section-header">
+      <p class="section-eyebrow">诚挚邀请</p>
+      <h2 class="section-title">💍 邀请函</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📅</div>
+        <div class="detail-text">
+          <span class="detail-label">日期</span>
+          <span class="detail-value big">2026年6月27日（星期六）</span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🕙</div>
+        <div class="detail-text">
+          <span class="detail-label">时间</span>
+          <span class="detail-value big">上午 10:00<em>9:30 开始入场</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">👗</div>
+        <div class="detail-text">
+          <span class="detail-label">着装要求</span>
+          <span class="detail-value"><span class="coming-soon">即将公布</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Venue -->
   <div class="section">
-    <h2>📍 地点</h2>
-    <p><b>茧云宫 Kian Hoon Kiong Temple</b></p>
-    <p>Jalan Padang Lalang, Kampung Padang Lalang,<br>84900 Tangkak, Johor Darul Ta'zim</p>
-    <a class="button" href="https://maps.app.goo.gl/iPYTMqg9r8xZaocq5" target="_blank">打开地图</a>
+    <div class="section-header">
+      <p class="section-eyebrow">仪式地点</p>
+      <h2 class="section-title">📍 地点</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🏯</div>
+        <div class="detail-text">
+          <span class="detail-label">庙宇</span>
+          <span class="detail-value">茧云宫 Kian Hoon Kiong Temple<em>Jalan Padang Lalang, Kampung Padang Lalang, 84900 Tangkak, Johor</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🗺️</div>
+        <div class="detail-text">
+          <span class="detail-label">导航</span>
+          <span class="detail-value"><a href="https://maps.app.goo.gl/Sv9Wp43TGumvA86e9" target="_blank">打开谷歌地图</a></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Contact -->
   <div class="section">
-    <h2>📞 联系方式</h2>
-    <p><b>请于2026年6月20日前回复</b></p>
-    <p>Hong Aun: +60 17-799 8065 / +65 8683-5537</p>
-    <p>Sheen Yie: +60 11-1199 5230 / +65 8783-5230</p>
+    <div class="section-header">
+      <p class="section-eyebrow">联系方式</p>
+      <h2 class="section-title">📞 联系 & 回复</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">⏰</div>
+        <div class="detail-text">
+          <span class="detail-label">回复截止日期</span>
+          <span class="detail-value big">2026年6月20日</span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📱</div>
+        <div class="detail-text">
+          <span class="detail-label">鸿安</span>
+          <span class="detail-value">+60 17-799 8065<em>+65 8683-5537</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📱</div>
+        <div class="detail-text">
+          <span class="detail-label">欣怡</span>
+          <span class="detail-value">+60 11-1199 5230<em>+65 8783-5230</em></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- RSVP -->
   <div class="section">
-    <h2>💌 回复出席</h2>
-    <p>点击下方按钮填写 RSVP 表格，只需一分钟 🌸</p>
-    <a class="button" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank">立即填写</a>
+    <div class="section-header">
+      <p class="section-eyebrow">确认出席</p>
+      <h2 class="section-title">💌 出席回复</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="rsvp-card">
+      <p>点击下方按钮填写 RSVP 表格，只需一分钟 🌸</p>
+      <a class="btn-rsvp" href="https://forms.gle/E4uDsY7RX2Z1GBa17" target="_blank">
+        ✦ 立即填写
+      </a>
+    </div>
   </div>
 
+  <!-- Live Stream -->
   <div class="section">
-    <h2>📺 线上直播</h2>
-    <p>无法亲临现场？欢迎通过 Facebook 观看直播</p>
-    <p>链接将于活动前提供</p>
+    <div class="section-header">
+      <p class="section-eyebrow">线上观看</p>
+      <h2 class="section-title">📺 线上直播</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">📡</div>
+        <div class="detail-text">
+          <span class="detail-label">平台</span>
+          <span class="detail-value">Facebook 直播<em>无法亲临现场？欢迎线上观看！</em></span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🔗</div>
+        <div class="detail-text">
+          <span class="detail-label">直播链接</span>
+          <span class="detail-value"><span class="coming-soon">活动前将公布链接</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Lunch -->
   <div class="section">
-    <h2>🍽 后续庆祝</h2>
-    <p>午宴（地点待定）</p>
-    <p>下午1点 · 详情稍后公布</p>
+    <div class="section-header">
+      <p class="section-eyebrow">典礼后庆祝</p>
+      <h2 class="section-title">🍽️ 庆祝午宴</h2>
+      <div class="gold-divider wide"></div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🕐</div>
+        <div class="detail-text">
+          <span class="detail-label">时间</span>
+          <span class="detail-value big">下午 1:00</span>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon-wrap">🍜</div>
+        <div class="detail-text">
+          <span class="detail-label">地点</span>
+          <span class="detail-value">午宴庆祝<em><span class="coming-soon">地点待定 — 详情稍后公布</span></em></span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="gallery">
-  <h2>📸 Our Moments</h2>
+</div><!-- /cn -->
+
+<!-- ── GALLERY ── -->
+<div class="gallery-section">
+  <p class="section-eyebrow">Our Moments · 美好瞬间</p>
+  <h2 class="section-title" style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:22px;">📸 Gallery</h2>
+  <div class="gold-divider wide"></div>
   <div class="gallery-grid">
-    <img src="photo1.jpg">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
+    <img src="photo1.jpg" alt="">
+    <img src="photo2.jpg" alt="">
+    <img src="photo3.jpg" alt="">
+    <img src="photo4.jpg" alt="">
   </div>
 </div>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <p class="footer-names">Tee Hong Aun &amp; Pang Sheen Yie</p>
+  <p class="footer-sub">27 · 06 · 2026 &nbsp;·&nbsp; 茧云宫, Tangkak</p>
+</footer>
 
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function toggleMusic(){
-  const music = document.getElementById('bgMusic');
-  if(music.paused){
-    music.volume = 0;
-    music.play();
-    let vol = 0;
-    const fade = setInterval(()=>{
-      if(vol < 0.5){
-        vol += 0.05;
-        music.volume = vol;
-      } else {
-        clearInterval(fade);
-      }
-    }, 200);
+/* ── Language ── */
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
+  document.getElementById('cn').style.display = lang === 'cn' ? 'block' : 'none';
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.getElementById('btnCN').classList.toggle('active', lang === 'cn');
+  // Update data-en/data-cn elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.cn;
+  });
+  document.getElementById('cdEyebrow').textContent =
+    lang === 'en' ? 'Counting down to the big day' : '距离大喜之日';
+  // Re-observe new sections
+  document.querySelectorAll('#' + lang + ' .section').forEach(sec => observer.observe(sec));
+}
+
+/* ── Music ── */
+let musicPlaying = false;
+const music = document.getElementById('bgMusic');
+
+function tryAutoplay() {
+  if (musicPlaying) return;
+  music.volume = 0;
+  music.play().then(() => {
+    musicPlaying = true;
+    document.getElementById('musicBtn').textContent = '⏸';
+    fadeVolume(0, 0.45);
+    ['click','scroll','touchstart','keydown'].forEach(e =>
+      document.removeEventListener(e, tryAutoplay));
+  }).catch(() => {});
+}
+['click','scroll','touchstart','keydown'].forEach(e =>
+  document.addEventListener(e, tryAutoplay, { passive: true }));
+
+function toggleMusic() {
+  if (musicPlaying) {
+    fadeVolume(music.volume, 0, () => { music.pause(); });
+    musicPlaying = false;
+    document.getElementById('musicBtn').textContent = '🎵';
   } else {
-    music.pause();
+    music.volume = 0;
+    music.play().then(() => {
+      musicPlaying = true;
+      document.getElementById('musicBtn').textContent = '⏸';
+      fadeVolume(0, 0.45);
+    });
   }
 }
 
-function enableAutoPlayOnce(){
-  const music = document.getElementById('bgMusic');
-  const playOnce = () => {
-    music.volume = 0;
-    music.play().then(()=>{
-      let vol = 0;
-      const fade = setInterval(()=>{
-        if(vol < 0.5){
-          vol += 0.05;
-          music.volume = vol;
-        } else {
-          clearInterval(fade);
-        }
-      }, 200);
-    }).catch(()=>{});
-    document.removeEventListener('click', playOnce);
-    document.removeEventListener('touchstart', playOnce);
-  };
-  document.addEventListener('click', playOnce);
-  document.addEventListener('touchstart', playOnce);
+function fadeVolume(from, to, cb) {
+  const steps = 20;
+  const diff = (to - from) / steps;
+  let i = 0;
+  const t = setInterval(() => {
+    music.volume = Math.min(1, Math.max(0, from + diff * i));
+    if (++i >= steps) { clearInterval(t); if (cb) cb(); }
+  }, 60);
 }
 
-/* PETALS GENERATOR */
-function createPetal(){
-  const petal = document.createElement('div');
-  petal.classList.add('petal');
-  petal.style.left = Math.random()*window.innerWidth + 'px';
-  petal.style.animation = 'fall ' + (5+Math.random()*5) + 's linear';
-  document.body.appendChild(petal);
-  setTimeout(()=>petal.remove(),10000);
-}
-setInterval(createPetal, 300);
-</script>
-
-<script>
-/* PARTICLES */
-/*
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-let particles = [];
-for (let i = 0; i < 60; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 3,
-        d: Math.random() * 1
+/* ── Countdown ── */
+function updateCountdown() {
+  const target = new Date('2026-06-27T10:00:00+08:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    ['Days','Hours','Mins','Secs'].forEach((_, i) => {
+      ['cdDays','cdHours','cdMins','cdSecs'][i];
     });
+    document.getElementById('cdDays').textContent =
+    document.getElementById('cdHours').textContent =
+    document.getElementById('cdMins').textContent =
+    document.getElementById('cdSecs').textContent = '00';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
 }
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(255,255,255,0.7)";
-    ctx.beginPath();
-    for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
-        ctx.moveTo(p.x, p.y);
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
-    }
-    ctx.fill();
-    update();
-}
-function update() {
-    for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
-        p.y += p.d;
-        if (p.y > canvas.height) {
-            p.y = 0;
-            p.x = Math.random() * canvas.width;
-        }
-    }
-}
-setInterval(draw, 33);
-*/
-</script>
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-<script>
-// SCROLL ANIMATION
-const sections = document.querySelectorAll('.section');
-
-function revealSections() {
-  sections.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-    if (top < window.innerHeight - 50) {
-      sec.classList.add('show');
-    }
-  });
+/* ── Petals ── */
+function createPetal() {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.left = Math.random() * window.innerWidth + 'px';
+  const dur = 6 + Math.random() * 6;
+  p.style.animation = `fall ${dur}s linear`;
+  p.style.width = p.style.height = (8 + Math.random() * 8) + 'px';
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), dur * 1000);
 }
+setInterval(createPetal, 400);
 
-window.addEventListener('scroll', revealSections);
-window.addEventListener('load', revealSections);
+/* ── Scroll: parallax + reveal ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+window.addEventListener('scroll', () => {
+  const img = document.getElementById('heroImg');
+  if (img) img.style.transform = `scale(1.06) translateY(${window.scrollY * 0.18}px)`;
+}, { passive: true });
 </script>
 
 </body>
