@@ -66,7 +66,7 @@ body {
   padding: 0 24px 36px; text-align: center;
 }
 .hero-eyebrow {
-  font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 0.35em;
+  font-family: 'Cinzel', serif; font-size: 32px; letter-spacing: 0.35em;
   text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
   animation: fadeUp 1.2s 0.2s both;
 }
@@ -409,7 +409,11 @@ body {
       <div class="d-icon">🍜</div>
       <div class="d-body">
         <span class="d-label">Celebration Lunch</span>
-        <span class="d-val big">1:00 PM<small class="dim">Venue TBC — details to follow</small></span>
+        <span class="d-val big">11:00 PM
+          <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">Shanghai Tang Restaurant | 上海滩餐馆</a></small>
+          <small style="color:var(--muted);">No. 3, Jalan Haji Manan, 84900 Tangkak, Johor</small>
+          <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">📍 Open in Google Maps →</a></small>
+        </span>
       </div>
     </div>
 
@@ -496,7 +500,11 @@ body {
       <div class="d-icon">🍜</div>
       <div class="d-body">
         <span class="d-label">庆祝午宴</span>
-        <span class="d-val big">下午 1:00<small class="dim">地点待定 — 详情稍后公布</small></span>
+        <span class="d-val big">下午 1:00
+          <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">Shanghai Tang Restaurant | 上海滩餐馆</a></small>
+          <small style="color:var(--muted);">No. 3, Jalan Haji Manan, 84900 Tangkak, Johor</small>
+          <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">📍 打开谷歌地图 →</a></small>
+        </span>
       </div>
     </div>
 
@@ -563,7 +571,7 @@ body {
   <p class="footer-sub">27 · 06 · 2026 &nbsp;·&nbsp; 茧云宫, Tangkak</p>
 </footer>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -605,32 +613,53 @@ function setLang(lang) {
 /* ── Music ── */
 let musicPlaying = false;
 const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+function setMusicBtn(playing) {
+  musicBtn.textContent = playing ? '⏸' : '🎵';
+}
+
 function fadeVol(from, to, cb) {
+  music.volume = from;
   const steps = 20, diff = (to - from) / steps; let i = 0;
   const timer = setInterval(() => {
-    music.volume = Math.min(1, Math.max(0, from + diff * i));
-    if (++i >= steps) { clearInterval(timer); if (cb) cb(); }
+    music.volume = Math.min(1, Math.max(0, from + diff * ++i));
+    if (i >= steps) { clearInterval(timer); if (cb) cb(); }
   }, 60);
 }
+
 function tryAutoplay() {
   if (musicPlaying) return;
   music.volume = 0;
-  music.play().then(() => {
-    musicPlaying = true;
-    document.getElementById('musicBtn').textContent = '⏸';
-    fadeVol(0, 0.45);
-    ['click','scroll','touchstart','keydown'].forEach(e => document.removeEventListener(e, tryAutoplay));
-  }).catch(() => {});
+  const p = music.play();
+  if (p !== undefined) {
+    p.then(() => {
+      musicPlaying = true;
+      setMusicBtn(true);
+      fadeVol(0, 0.45);
+      ['click','scroll','touchstart','keydown'].forEach(e => document.removeEventListener(e, tryAutoplay));
+    }).catch(() => { /* blocked — user must tap button */ });
+  }
 }
 ['click','scroll','touchstart','keydown'].forEach(e => document.addEventListener(e, tryAutoplay, { passive: true }));
+
 function toggleMusic() {
   if (musicPlaying) {
-    fadeVol(music.volume, 0, () => music.pause());
+    fadeVol(music.volume, 0, () => { music.pause(); music.currentTime = 0; });
     musicPlaying = false;
-    document.getElementById('musicBtn').textContent = '🎵';
+    setMusicBtn(false);
   } else {
     music.volume = 0;
-    music.play().then(() => { musicPlaying = true; document.getElementById('musicBtn').textContent = '⏸'; fadeVol(0, 0.45); });
+    const p = music.play();
+    if (p !== undefined) {
+      p.then(() => {
+        musicPlaying = true;
+        setMusicBtn(true);
+        fadeVol(0, 0.45);
+      }).catch(err => {
+        console.warn('Music play failed:', err);
+      });
+    }
   }
 }
 
