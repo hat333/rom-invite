@@ -409,7 +409,7 @@ body {
       <div class="d-icon">🍜</div>
       <div class="d-body">
         <span class="d-label">Celebration Lunch</span>
-        <span class="d-val big">11:00 PM
+        <span class="d-val big">12:00 PM
           <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">Shanghai Tang Restaurant | 上海滩餐馆</a></small>
           <small style="color:var(--muted);">No. 3, Jalan Haji Manan, 84900 Tangkak, Johor</small>
           <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">📍 Open in Google Maps →</a></small>
@@ -500,7 +500,7 @@ body {
       <div class="d-icon">🍜</div>
       <div class="d-body">
         <span class="d-label">庆祝午宴</span>
-        <span class="d-val big">下午 11:00
+        <span class="d-val big">下午 12:00
           <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">Shanghai Tang Restaurant | 上海滩餐馆</a></small>
           <small style="color:var(--muted);">No. 3, Jalan Haji Manan, 84900 Tangkak, Johor</small>
           <small><a href="https://maps.app.goo.gl/gSzyi1Au62ezir8CA" target="_blank">📍 打开谷歌地图 →</a></small>
@@ -637,11 +637,11 @@ function tryAutoplay() {
       musicPlaying = true;
       setMusicBtn(true);
       fadeVol(0, 0.45);
-      ['click','scroll','touchstart','keydown'].forEach(e => document.removeEventListener(e, tryAutoplay));
+      window.removeEventListener('scroll', tryAutoplay);
     }).catch(() => { /* blocked — user must tap button */ });
   }
 }
-['click','scroll','touchstart','keydown'].forEach(e => document.addEventListener(e, tryAutoplay, { passive: true }));
+window.addEventListener('scroll', tryAutoplay, { passive: true });
 
 function toggleMusic() {
   if (musicPlaying) {
