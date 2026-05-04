@@ -630,18 +630,27 @@ function fadeVol(from, to, cb) {
 
 function tryAutoplay() {
   if (musicPlaying) return;
+
+  music.muted = true;
   music.volume = 0;
+
   const p = music.play();
   if (p !== undefined) {
     p.then(() => {
+      // Unmute after play is allowed
+      music.muted = false;
       musicPlaying = true;
       setMusicBtn(true);
       fadeVol(0, 0.45);
       window.removeEventListener('scroll', tryAutoplay);
-    }).catch(() => { /* blocked — user must tap button */ });
+      window.removeEventListener('touchstart', tryAutoplay);
+    }).catch(() => {
+      // still blocked, wait for user interaction
+    });
   }
 }
 window.addEventListener('scroll', tryAutoplay, { passive: true });
+window.addEventListener('touchstart', tryAutoplay, { passive: true });
 
 function toggleMusic() {
   if (musicPlaying) {
@@ -649,6 +658,7 @@ function toggleMusic() {
     musicPlaying = false;
     setMusicBtn(false);
   } else {
+    music.muted = false;
     music.volume = 0;
     const p = music.play();
     if (p !== undefined) {
