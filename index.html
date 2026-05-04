@@ -239,6 +239,19 @@ body {
   font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
   transition: color 0.2s;
 }
+
+/* Fix iOS auto-detected phone number color */
+a[href^="tel"],
+a[href^="sms"] {
+  color: var(--text) !important;
+  text-decoration: none !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/* Extra safeguard for iOS data detectors */
+span, div {
+  -webkit-text-fill-color: inherit;
+}
 .d-val a:hover { color: #fff; }
 
 /* card separator */
